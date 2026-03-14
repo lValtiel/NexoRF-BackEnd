@@ -1,9 +1,11 @@
 package com.devemersonc.backend_sys_picking.controller;
 
+import com.devemersonc.backend_sys_picking.DTO.picking.PickDTO;
 import com.devemersonc.backend_sys_picking.DTO.productDTO.CreateUpdateProductDTO;
 import com.devemersonc.backend_sys_picking.DTO.productDTO.ProductResponseDTO;
 import com.devemersonc.backend_sys_picking.service.product.ProductService;
 import jakarta.validation.Valid;
+import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,5 +54,11 @@ public class ProductController {
     public ResponseEntity<ProductResponseDTO> getProductBySku(@RequestParam String data) {
         ProductResponseDTO productResponseDTO = productService.searchProduct(data);
         return ResponseEntity.ok(productResponseDTO);
+    }
+
+    @PostMapping("/pick")
+    public ResponseEntity<String> pickProduct(@RequestBody PickDTO dto) {
+        productService.discountStock(dto.getProductId(), dto.getQuantity());
+        return ResponseEntity.ok("Cantidad de producto actualizada.");
     }
 }

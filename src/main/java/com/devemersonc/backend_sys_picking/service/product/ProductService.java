@@ -14,4 +14,5 @@ public interface ProductService {
     void deleteProduct(Long product_id);
     Product findProductById(Long product_id);
     ProductResponseDTO searchProduct(String data);
+    void discountStock(Long productId, int quantity);
 }

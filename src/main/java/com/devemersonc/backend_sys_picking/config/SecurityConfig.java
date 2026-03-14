@@ -42,12 +42,15 @@ public class SecurityConfig {
                         //ENDPOINTS PRODUCTCONTROLLER
                         .requestMatchers(HttpMethod.GET, "/api/products").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/products/product_id").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/products/findByName").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/products").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/products/product_id").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/products/product_id").hasRole("ADMIN")
                         //ENDPOINTS ORDERS
                         .requestMatchers(HttpMethod.POST, "/api/orders").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/orders").hasRole("ADMIN")
+                        //Picking
+                        .requestMatchers(HttpMethod.POST, "/api/products/pick").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .exceptionHandling(exceptionHandling -> exceptionHandling.authenticationEntryPoint(jwtAuthenticationEntryPoint))
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

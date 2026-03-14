@@ -94,13 +94,13 @@ public class ProductServiceImpl implements ProductService{
         }
 
         return productMapper.toDTO(product);
+    }
 
-        /*Product product = productRepository.findBySku(data);
-        if(product == null) {
-            throw new ResourceNotFoundException("Producto no encontrado.");
-        }else {
-            ProductResponseDTO productResponseDTO = productMapper.toDTO(product);
-            return productResponseDTO;
-        }*/
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @Override
+    public void discountStock(Long productId, int quantity) {
+        Product product = productRepository.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado."));
+        product.setAmount(product.getAmount() - quantity);
+        productRepository.save(product);
     }
 }
