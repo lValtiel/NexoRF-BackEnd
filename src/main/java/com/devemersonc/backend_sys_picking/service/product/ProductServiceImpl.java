@@ -87,9 +87,6 @@ public class ProductServiceImpl implements ProductService{
             product = productRepository.findByName(data);
         }
         if(product == null) {
-            product = productRepository.findByLocation(data);
-        }
-        if(product == null) {
             throw new ResourceNotFoundException("Producto no encontrado.");
         }
 

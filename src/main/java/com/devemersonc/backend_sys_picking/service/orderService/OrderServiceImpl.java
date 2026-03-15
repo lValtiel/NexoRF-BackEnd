@@ -72,4 +72,12 @@ public class OrderServiceImpl implements OrderService{
         Order order = orderRepository.findById(order_id).orElseThrow(() -> new ResourceNotFoundException("Orden no encontrada."));
         return order;
     }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @Override
+    public void updateStateOrder(Long orderId, String state) {
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> new ResourceNotFoundException("Orden no encontrada."));
+        order.setState(state);
+        orderRepository.save(order);
+    }
 }

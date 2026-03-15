@@ -49,6 +49,7 @@ public class SecurityConfig {
                         //ENDPOINTS ORDERS
                         .requestMatchers(HttpMethod.POST, "/api/orders").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/orders").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/orders/update-state").hasRole("ADMIN")
                         //Picking
                         .requestMatchers(HttpMethod.POST, "/api/products/pick").hasRole("ADMIN")
                         .anyRequest().authenticated())

@@ -14,4 +14,5 @@ public interface OrderService {
     OrderResponseDTO getOrder(Long order_id);
     Order newOrder(CreateOrderDTO createOrderDTO);
     Order findOrderById(Long order_id);
+    void updateStateOrder(Long orderId, String state);
 }

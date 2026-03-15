@@ -2,6 +2,7 @@ package com.devemersonc.backend_sys_picking.controller;
 
 import com.devemersonc.backend_sys_picking.DTO.orderDTO.CreateOrderDTO;
 import com.devemersonc.backend_sys_picking.DTO.orderDTO.OrderResponseDTO;
+import com.devemersonc.backend_sys_picking.DTO.orderDTO.OrderStateDTO;
 import com.devemersonc.backend_sys_picking.model.Order;
 import com.devemersonc.backend_sys_picking.service.orderService.OrderService;
 import jakarta.validation.Valid;
@@ -29,5 +30,11 @@ public class OrderController {
     public ResponseEntity<String> createOrder(@Valid @RequestBody CreateOrderDTO createOrderDTO) {
         orderService.newOrder(createOrderDTO);
         return ResponseEntity.ok("Order creada con éxito");
+    }
+
+    @PostMapping("/update-state")
+    public ResponseEntity<String> updateStateOrder(@RequestBody OrderStateDTO dto) {
+        orderService.updateStateOrder(dto.getOrderId(), dto.getState());
+        return ResponseEntity.ok("Estado de la orden actualizado.");
     }
 }
